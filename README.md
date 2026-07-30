@@ -136,11 +136,11 @@ http://127.0.0.1:5000
 
 ### Home Page
 
-![Home Page](screenshots/home.png)
+![Home Page](Screenshots/home.png)
 
 ### Prediction Result
 
-![Prediction Result](screenshots/prediction.png)
+![Prediction Result](screenshots/Prediction.png)
 
 ---
 
