@@ -140,7 +140,7 @@ http://127.0.0.1:5000
 
 ### Prediction Result
 
-![Prediction Result](screenshots/Prediction.png)
+![Prediction Result](Screenshots/Prediction.png)
 
 ---
 
