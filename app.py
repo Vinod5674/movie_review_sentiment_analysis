@@ -1,9 +1,25 @@
 from flask import Flask, render_template, request
 import nltk
-nltk.download("stopwards")
-nltk.download("punkt")
-nltk.download("wordnet")
-nltk.download("punkt_tab")
+import os
+
+nltk_data_path ="/opt/render/nltk_data"
+
+os.makedirs(nltk_data_path , exist_ok=True)
+
+nltk.data.path.append(nltk_data_path)
+
+resources = [
+    "stopwords",
+    "punkt",
+    "punkt_tab",
+    "wordnet"
+]
+
+for resouce in resources:
+    try:
+        nlkt.data.find(resouce)
+    except LookupError:
+        nltk.download(resource,download_dir = nltk_data_path)
 from src.predict import predict_sentiment
 
 app = Flask(__name__)
@@ -34,4 +50,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(host = "0.0.0.0" , port=5000)
