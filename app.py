@@ -9,17 +9,17 @@ os.makedirs(nltk_data_path , exist_ok=True)
 nltk.data.path.append(nltk_data_path)
 
 resources = [
-    "stopwords",
-    "punkt",
-    "punkt_tab",
-    "wordnet"
+    "corpora/stopwords",
+    "tokenizers/punkt",
+    "tokenizers/punkt_tab",
+    "corpora/wordnet"
 ]
 
-for resouce in resources:
+for item in resources:
     try:
-        nltk.data.find(resource)
+        nltk.data.find(item)
     except LookupError:
-        nltk.download(resource,download_dir = nltk_data_path)
+        nltk.download(item.split("/")[-1],nltk.download_dir=nltk_data_path)
 from src.predict import predict_sentiment
 
 app = Flask(__name__)
