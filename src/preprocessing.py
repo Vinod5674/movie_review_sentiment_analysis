@@ -2,17 +2,31 @@ import re
 import string
 import nltk
 
-
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Uncomment these lines only the first time
-# nltk.download('punkt')
-# nltk.download('stopwords')
-# nltk.download('wordnet')
-# nltk.download('omw-1.4')
+# -------------------------
+# Download NLTK resources if missing
+# -------------------------
+
+resources = [
+    ("tokenizers/punkt", "punkt"),
+    ("corpora/stopwords", "stopwords"),
+    ("corpora/wordnet", "wordnet"),
+    ("corpora/omw-1.4", "omw-1.4")
+]
+
+for path, name in resources:
+    try:
+        nltk.data.find(path)
+    except LookupError:
+        nltk.download(name)
+
+# -------------------------
+# Initialize
+# -------------------------
 
 stop_words = set(stopwords.words("english"))
 lemmatizer = WordNetLemmatizer()
@@ -23,14 +37,12 @@ def remove_html(text):
 
 
 def remove_url(text):
-    pattern = re.compile(r'https?://\S+|www\.\S+')
-    return pattern.sub('', text)
+    pattern = re.compile(r"https?://\S+|www\.\S+")
+    return pattern.sub("", text)
 
 
 def remove_punctuation(text):
-    for char in string.punctuation:
-        text = text.replace(char, '')
-    return text
+    return text.translate(str.maketrans("", "", string.punctuation))
 
 
 def remove_stopwords(tokens):
@@ -43,28 +55,18 @@ def lemmatize_words(tokens):
 
 def preprocess_text(text):
 
-    # Lowercase
     text = text.lower()
 
-    # Remove HTML
     text = remove_html(text)
 
-    # Remove URL
     text = remove_url(text)
 
-    # Remove Punctuation
     text = remove_punctuation(text)
 
-    # Tokenization
     tokens = word_tokenize(text)
 
-    # Remove Stopwords
     tokens = remove_stopwords(tokens)
 
-    # Lemmatization
     tokens = lemmatize_words(tokens)
 
-    # Convert list into string
-    text = " ".join(tokens)
-
-    return text
+    return " ".join(tokens)
