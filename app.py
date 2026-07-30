@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
-import nlkt
+import nltk
 nltk.download("stopwards")
 nltk.download("punkt")
 nltk.download("wordnet")
+nltk.download("punkt_tab")
 from src.predict import predict_sentiment
 
 app = Flask(__name__)
