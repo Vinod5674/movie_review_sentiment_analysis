@@ -17,7 +17,7 @@ resources = [
 
 for resouce in resources:
     try:
-        nlkt.data.find(resouce)
+        nltk.data.find(resource)
     except LookupError:
         nltk.download(resource,download_dir = nltk_data_path)
 from src.predict import predict_sentiment
